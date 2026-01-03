@@ -83,6 +83,7 @@ const Hero = () => {
       <div className="flex flex-col pt-20 sm:pt-32 md:pt-0 select-none max-w-4xl w-full md:w-auto z-10">
         <h5
           className={`${styles.intro} font-mono font-medium text-indigo-light staggered-reveal text-sm sm:text-base`}
+          style={{ marginTop: '80px' }}
         >
           Hi, my name is
         </h5>
