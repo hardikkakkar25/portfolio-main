@@ -7,6 +7,105 @@ import { toast } from "react-hot-toast";
 import styles from "./Contact.module.scss";
 import { MENULINKS, EXTERNAL_LINKS } from "../../constants";
 
+// Wrapper component to handle GitHub Calendar errors gracefully
+const GitHubCalendarWrapper = ({ username }) => {
+  const [hasError, setHasError] = useState(false);
+  const calendarRef = useRef(null);
+
+  useEffect(() => {
+    // Use MutationObserver to detect error messages
+    const observer = new MutationObserver(() => {
+      if (calendarRef.current) {
+        // Check all text nodes for error messages
+        const walker = document.createTreeWalker(
+          calendarRef.current,
+          NodeFilter.SHOW_TEXT,
+          null
+        );
+
+        let node;
+        while ((node = walker.nextNode())) {
+          const text = node.textContent || '';
+          if (text.includes('Error') && (text.includes('failed') || text.includes('Failed'))) {
+            setHasError(true);
+            break;
+          }
+        }
+
+        // Also check direct text content
+        const errorText = calendarRef.current.textContent || '';
+        if (errorText.includes('Error') && (errorText.includes('failed') || errorText.includes('Failed'))) {
+          setHasError(true);
+        }
+      }
+    });
+
+    // Start observing after component renders
+    const timeout = setTimeout(() => {
+      if (calendarRef.current) {
+        observer.observe(calendarRef.current, {
+          childList: true,
+          subtree: true,
+          characterData: true,
+        });
+
+        // Initial check
+        const errorText = calendarRef.current.textContent || '';
+        if (errorText.includes('Error') && (errorText.includes('failed') || errorText.includes('Failed'))) {
+          setHasError(true);
+        }
+      }
+    }, 1500);
+
+    // Check again after a longer delay in case error appears later
+    const delayedCheck = setTimeout(() => {
+      if (calendarRef.current && !hasError) {
+        const errorText = calendarRef.current.textContent || '';
+        if (errorText.includes('Error') && (errorText.includes('failed') || errorText.includes('Failed'))) {
+          setHasError(true);
+        }
+      }
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeout);
+      clearTimeout(delayedCheck);
+      observer.disconnect();
+    };
+  }, [hasError]);
+
+  if (hasError) {
+    return (
+      <div className="text-gray-light-3 py-8 px-4">
+        <p className="mb-3">GitHub contributions calendar is temporarily unavailable.</p>
+        <a
+          href={`https://github.com/${username}`}
+          target="_blank"
+          rel="noreferrer"
+          className="text-indigo-light hover:underline inline-flex items-center gap-2"
+        >
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+          </svg>
+          View my GitHub profile →
+        </a>
+      </div>
+    );
+  }
+
+  return (
+    <div ref={calendarRef} className="github-calendar-wrapper">
+      <GitHubCalendar
+        username={username}
+        colorScheme="dark"
+        blockSize={15}
+        blockMargin={6}
+        fontSize={16}
+      />
+    </div>
+  );
+};
+
 gsap.registerPlugin(ScrollTrigger);
 
 const PROJECT_TYPES = [
@@ -350,13 +449,7 @@ const Contact = () => {
         <div className="github-calendar mt-20 text-center">
           <h2 className="text-3xl font-semibold mb-6">GitHub Contributions</h2>
           <div className="flex justify-center">
-            <GitHubCalendar
-              username="hardikkakkar25"
-              colorScheme="dark"
-              blockSize={15}
-              blockMargin={6}
-              fontSize={16}
-            />
+            <GitHubCalendarWrapper username="hardikkakkar25" />
           </div>
         </div>
       </div>
@@ -373,6 +466,22 @@ const Contact = () => {
           .resume-frame iframe {
             height: 500px;
           }
+        }
+
+        /* Hide GitHub calendar error messages */
+        .github-calendar-wrapper [class*="Error"],
+        .github-calendar-wrapper [class*="error"],
+        .github-calendar-wrapper:has-text("Error") {
+          display: none !important;
+        }
+
+        /* Style for fallback GitHub link */
+        .github-calendar-wrapper a {
+          transition: all 0.3s ease;
+        }
+
+        .github-calendar-wrapper a:hover {
+          transform: translateX(4px);
         }
       `}</style>
     </section>
