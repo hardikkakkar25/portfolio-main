@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { ABOUT_BIO } from "../../constants";
 
 const About1 = ({ clientHeight }) => {
   const sectionRef = useRef(null);
@@ -56,12 +57,10 @@ const About1 = ({ clientHeight }) => {
           className="font-medium text-[2.70rem] md:text-6xl lg:text-[4rem] text-center"
         >
           <span className="about-1 leading-tight">
-            I&apos;m a passionate Engineer who&apos;s focused on building
-            scalable and performant apps.{" "}
+            {ABOUT_BIO.paragraph.split(".")[0]}.{" "}
           </span>
           <span className="about-2 leading-tight">
-            I take responsibility to craft a good user experience using modern
-            frontend architecture.{" "}
+            {ABOUT_BIO.paragraph.split(".").slice(1, 3).join(".")}.
           </span>
         </h1>
       </div>

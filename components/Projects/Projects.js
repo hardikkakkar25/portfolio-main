@@ -73,7 +73,7 @@ const Projects = ({ isDesktop, clientHeight }) => {
       scrub: 0,
       pin: true,
       animation: timeline,
-      pinSpacing: "margin",
+      pinSpacing: true,
     });
 
     return [timeline, scrollTrigger];

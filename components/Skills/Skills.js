@@ -9,22 +9,35 @@ const Skills = () => {
   const sectionRef = useRef(null);
 
   useLayoutEffect(() => {
+    if (!sectionRef.current) return;
+
     const ctx = gsap.context(() => {
+      const wrapper = sectionRef.current.querySelector(".skills-wrapper");
+      const elements = wrapper.querySelectorAll(".staggered-reveal");
+      
+      // Set initial state
+      gsap.set(elements, { opacity: 0, y: 30 });
+
       const tl = gsap
-        .timeline({ defaults: { ease: "none" } })
-        .from(
-          sectionRef.current.querySelectorAll(".staggered-reveal"),
-          { opacity: 0, duration: 0.5, stagger: 0.5 },
+        .timeline({ defaults: { ease: "power2.out" } })
+        .to(
+          elements,
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.2 },
           "<"
         );
 
-      ScrollTrigger.create({
-        trigger: sectionRef.current.querySelector(".skills-wrapper"),
-        start: "100px bottom",
-        end: "center center",
-        scrub: 0,
+      const trigger = ScrollTrigger.create({
+        trigger: wrapper,
+        start: "top 80%",
+        toggleActions: "play none none none",
         animation: tl,
       });
+
+      // If already in view, play immediately
+      const rect = wrapper.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        tl.play();
+      }
     });
 
     return () => ctx.revert();
@@ -33,7 +46,7 @@ const Skills = () => {
   return (
     <section
       ref={sectionRef}
-      id={MENULINKS[1].ref}
+      id="skills"
       className="w-full relative select-none mt-44"
     >
       <div className="section-container py-16 flex flex-col justify-center">
@@ -70,6 +83,7 @@ const Skills = () => {
                   alt={skill}
                   width={50}
                   height={50}
+                  loading="lazy"
                 />
               ))}
             </div>
@@ -86,6 +100,7 @@ const Skills = () => {
                   alt={skill}
                   width={50}
                   height={50}
+                  loading="lazy"
                 />
               ))}
             </div>
@@ -103,6 +118,7 @@ const Skills = () => {
                     alt={skill}
                     width={50}
                     height={50}
+                    loading="lazy"
                   />
                 ))}
               </div>
@@ -119,6 +135,7 @@ const Skills = () => {
                     alt={skill}
                     width={50}
                     height={50}
+                    loading="lazy"
                   />
                 ))}
               </div>

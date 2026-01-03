@@ -4,7 +4,7 @@ import gsap from "gsap";
 import Button from "../Button/Button";
 import Profiles from "../Profiles/Profiles";
 import styles from "./Hero.module.scss";
-import { MENULINKS, TYPED_STRINGS } from "../../constants";
+import { MENULINKS, TYPED_STRINGS, HERO_BULLETS } from "../../constants";
 
 const options = {
   strings: TYPED_STRINGS,
@@ -75,30 +75,54 @@ const Hero = () => {
           }
         `}
       </style>
-      <div className="flex flex-col pt-40 md:pt-0 select-none">
+      <div className="flex flex-col pt-40 md:pt-0 select-none max-w-4xl">
         <h5
           className={`${styles.intro} font-mono font-medium text-indigo-light staggered-reveal`}
         >
           Hi, my name is
         </h5>
-        <h1 className={`${styles.heroName} text-white text-6xl font-semibold`}>
+        <h1 className={`${styles.heroName} text-white text-5xl md:text-6xl font-semibold leading-tight`}>
           <span className={`relative ${styles.emphasize} staggered-reveal`}>
             Hardik
           </span>
           <span className="staggered-reveal"> Kakkar</span>
         </h1>
-        <p>
+        <h2 className="text-xl md:text-2xl text-gray-light-2 font-medium mt-4 staggered-reveal leading-relaxed">
+          Senior Full Stack Developer for Dashboards, Internal Tools &amp; E-Commerce
+        </h2>
+        <p className="text-base md:text-lg text-gray-light-3 mt-3 staggered-reveal leading-relaxed max-w-2xl">
+          Helping founders and teams ship production-ready dashboards, internal tools, e-commerce stores, and SaaS MVPs with the MERN stack, GraphQL, and AWS.
+        </p>
+        
+        {/* Typed animation */}
+        <p className="mt-4">
           <span
             ref={typedElementRef}
-            className="staggered-reveal text-3xl text-gray-light-3 font-mono leading-relaxed"
+            className="staggered-reveal text-2xl md:text-3xl text-indigo-light font-mono leading-relaxed"
           />
         </p>
-        <div className="staggered-reveal">
+
+        {/* Bullet points */}
+        <ul className="mt-6 space-y-2 staggered-reveal">
+          {HERO_BULLETS.map((bullet, index) => (
+            <li key={index} className="flex items-start text-gray-light-3 text-sm md:text-base">
+              <span className="text-indigo-light mr-3 mt-1">▹</span>
+              <span>{bullet}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="staggered-reveal mt-4">
           <Profiles />
         </div>
-        <div className="staggered-reveal pt-4">
+        
+        {/* Dual CTAs */}
+        <div className="staggered-reveal pt-6 flex flex-wrap gap-4">
           <Button href={`#${MENULINKS[4].ref}`} classes="link" type="primary">
-            Hire Me !
+            Book a Free Project Call
+          </Button>
+          <Button href={`#${MENULINKS[2].ref}`} classes="link" type="secondary">
+            View Projects
           </Button>
         </div>
       </div>

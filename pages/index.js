@@ -7,11 +7,13 @@ import Menu from "@/components/Header/Menu/Menu";
 import ProgressIndicator from "@/components/ProgressIndicator/ProgressIndicator";
 import Cursor from "@/components/Cursor/Cursor";
 import Hero from "@/components/Hero/Hero";
+import Services from "@/components/Services/Services";
 import About1 from "@/components/About/About1";
 import Skills from "@/components/Skills/Skills";
 import About2 from "@/components/About/About2";
 import Projects from "@/components/Projects/Projects";
 import Work from "@/components/Work/Work";
+import Testimonials from "@/components/Testimonials/Testimonials";
 import Collaboration from "@/components/Collaboration/Collaboration";
 import Contact from "@/components/Contact/Contact";
 import Footer from "@/components/Footer/Footer";
@@ -58,7 +60,7 @@ export default function Home() {
           </Header>
           <ProgressIndicator />
           <Cursor isDesktop={isDesktop} />
-          <main className="flex flex-col">
+          <div className="flex flex-col">
             <div
               role="img"
               className="text-gray-light-1 opacity-10 sm:text-9xl xs:text-8xl inline-block -z-10 absolute rotate-90 right-0 md:top-52 xs:top-96"
@@ -67,14 +69,16 @@ export default function Home() {
             </div>
             <div className="fixed top-0 left-0 h-screen w-screen -z-1" />
             <Hero />
+            <Services />
             <About1 clientHeight={clientHeight} />
             <Skills />
             <About2 clientHeight={clientHeight} />
             <Projects isDesktop={isDesktop} clientHeight={clientHeight} />
             <Work isDesktop={isDesktop} />
+            <Testimonials />
             <Collaboration clientHeight={clientHeight} />
             <Contact />
-          </main>
+          </div>
           <Footer />
         </>
       )}

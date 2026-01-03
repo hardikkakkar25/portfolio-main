@@ -15,6 +15,7 @@ html {
   scroll-behavior: smooth;
   -ms-overflow-style: scrollbar;
   overflow-x: hidden;
+  overflow-y: auto;
   -webkit-font-smoothing: antialiased;
 
   @media (min-width: 320px) {
@@ -40,6 +41,14 @@ html {
 body {
   box-sizing: border-box;
   @apply bg-black text-white overflow-x-hidden;
+  overflow-y: auto;
+  height: auto;
+  min-height: 100vh;
+}
+
+main {
+  overflow-x: hidden;
+  position: relative;
 }
 
 ::-webkit-scrollbar {

@@ -1,9 +1,9 @@
-import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Tabs from "./Tabs/Tabs";
 import StickyScroll from "./StickyScroll/StickyScroll";
-import { MENULINKS, WORK_CONTENTS } from "../../constants";
+import { MENULINKS, WORK_CONTENTS, EXPERIENCE } from "../../constants";
 
 const Work = ({ isDesktop }) => {
   const sectionRef = useRef(null);
@@ -11,12 +11,32 @@ const Work = ({ isDesktop }) => {
   const tabItems = useMemo(
     () => [
       {
+        title: "Wellness Extract",
+        value: "wellness-extract",
+        content: (
+          <StickyScroll
+            isDesktop={isDesktop}
+            contentItems={WORK_CONTENTS.WELLNESS_EXTRACT}
+          />
+        ),
+      },
+      {
         title: "Alert Enterprise",
         value: "alert-enterprise",
         content: (
           <StickyScroll
             isDesktop={isDesktop}
             contentItems={WORK_CONTENTS.ALERT_ENTERPRISE}
+          />
+        ),
+      },
+      {
+        title: "Freelance",
+        value: "freelance",
+        content: (
+          <StickyScroll
+            isDesktop={isDesktop}
+            contentItems={WORK_CONTENTS.FREELANCE}
           />
         ),
       },
@@ -64,16 +84,65 @@ const Work = ({ isDesktop }) => {
         <div className="flex flex-col work-wrapper">
           <div className="flex flex-col">
             <p className="uppercase tracking-widest text-gray-light-1 staggered-reveal">
-              WORK
+              EXPERIENCE
             </p>
-            <h1 className="text-6xl mt-2 font-medium text-gradient w-fit staggered-reveal">
-              Experience
+            <h1 className="text-5xl md:text-6xl mt-2 font-medium text-gradient w-fit staggered-reveal">
+              Work History
             </h1>
-            <h2 className="text-[1.65rem] font-medium md:max-w-lg w-full mt-2 staggered-reveal">
-              A quick recap of where I&apos;ve worked.{" "}
+            <h2 className="text-xl md:text-[1.65rem] font-medium md:max-w-lg w-full mt-2 staggered-reveal">
+              2.5+ years building production systems across enterprises and startups.
             </h2>
           </div>
-          <Tabs tabItems={tabItems} />
+
+          {/* Experience Timeline Cards */}
+          <div className="mt-12 space-y-6 staggered-reveal">
+            {EXPERIENCE.map((exp, index) => (
+              <div
+                key={index}
+                className="relative pl-8 pb-8 border-l-2 border-gray-dark-3 last:pb-0"
+              >
+                {/* Timeline dot */}
+                <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-indigo-light" />
+                
+                <div className="bg-gradient-to-br from-gray-dark-4/50 to-gray-dark-5/30 border border-gray-dark-3 rounded-xl p-6 hover:border-indigo-light/30 transition-all duration-300">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+                    <div>
+                      <h3 className="text-xl font-semibold text-white">{exp.role}</h3>
+                      <p className="text-indigo-light font-medium">{exp.company}</p>
+                    </div>
+                    <span className="text-sm text-gray-light-3 font-mono">
+                      {exp.period}
+                    </span>
+                  </div>
+                  
+                  <p className="text-gray-light-2 text-sm md:text-base mb-4">
+                    {exp.description}
+                  </p>
+                  
+                  <ul className="space-y-2 mb-4">
+                    {exp.bullets.map((bullet, i) => (
+                      <li key={i} className="flex items-start text-gray-light-3 text-sm">
+                        <span className="text-indigo-light mr-2 mt-1">▹</span>
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <p className="text-xs text-gray-light-3 font-mono">
+                    {exp.tech}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Interactive Tabs (existing component) */}
+          <div className="mt-16">
+            <h3 className="text-2xl font-semibold text-white mb-6 staggered-reveal">
+              Detailed Journey
+            </h3>
+            <Tabs tabItems={tabItems} />
+          </div>
         </div>
       </div>
     </section>
