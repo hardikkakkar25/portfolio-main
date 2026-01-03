@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import GitHubCalendar from "react-github-calendar";
+import emailjs from "@emailjs/browser";
+import { toast } from "react-hot-toast";
 import styles from "./Contact.module.scss";
 import { MENULINKS, EXTERNAL_LINKS } from "../../constants";
 
@@ -16,6 +18,8 @@ const PROJECT_TYPES = [
 ];
 
 const BUDGET_RANGES = [
+  "$250 - $1,000",
+  "$1,000 - $5,000",
   "$5,000 - $10,000",
   "$10,000 - $25,000",
   "$25,000 - $50,000",
@@ -44,6 +48,14 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
+  // Initialize EmailJS on mount
+  useEffect(() => {
+    if (process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
+      emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+    }
+  }, []);
 
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
@@ -87,20 +99,53 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission - replace with actual API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    setIsSubmitting(false);
-    setSubmitted(true);
-    setFormData({
-      name: "",
-      email: "",
-      projectType: "",
-      budget: "",
-      timeline: "",
-      message: "",
-    });
+    setSubmitError("");
+
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      setSubmitError("Email service not configured. Please contact me directly.");
+      setIsSubmitting(false);
+      toast.error("Configuration error. Please use the email link below.");
+      return;
+    }
+
+    // Prepare template parameters
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      project_type: formData.projectType || "Not specified",
+      budget: formData.budget || "Not specified",
+      timeline: formData.timeline || "Not specified",
+      message: formData.message,
+      to_name: "Hardik Kakkar",
+      reply_to: formData.email,
+    };
+
+    try {
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      
+      setIsSubmitting(false);
+      setSubmitted(true);
+      toast.success("Message sent successfully!");
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        projectType: "",
+        budget: "",
+        timeline: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      setSubmitError("Failed to send message. Please try again or contact me directly.");
+      setIsSubmitting(false);
+      toast.error("Failed to send message. Please try again.");
+    }
   };
 
   const handleDownload = () => {
@@ -239,6 +284,21 @@ const Contact = () => {
                   placeholder="Tell me about your project, goals, and any specific requirements..."
                 />
               </div>
+
+              {submitError && (
+                <div className="md:col-span-2 p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
+                  <p className="text-red-400 text-sm">{submitError}</p>
+                  <p className="text-gray-light-3 text-xs mt-2">
+                    You can also reach me at{" "}
+                    <a
+                      href="mailto:hardikkakkar25@gmail.com"
+                      className="text-indigo-light hover:underline"
+                    >
+                      hardikkakkar25@gmail.com
+                    </a>
+                  </p>
+                </div>
+              )}
 
               <div className="md:col-span-2 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
                 <button
