@@ -294,7 +294,7 @@ export const TESTIMONIALS = [
 
 export const ABOUT_BIO = {
   paragraph:
-    "Hardik Kakkar is a Senior Full Stack Developer specializing in e-commerce platforms, inventory systems, dashboards, and SaaS products. With 2.5+ years of professional experience across Wellness Extract, Alert Enterprise, and freelance projects, Hardik builds scalable systems using the MERN stack, GraphQL, and AWS. The focus is on reliability, clean architecture, and shipping production-ready features that actually move business metrics.",
+    "I am a Senior Full Stack Developer specializing in e-commerce platforms, inventory systems, dashboards, and SaaS products. With 2.5+ years of professional experience across Wellness Extract, Alert Enterprise, and freelance projects, I build scalable systems using the MERN stack, GraphQL, and AWS. The focus is on reliability, clean architecture, and shipping production-ready features that actually move business metrics.",
   skills: [
     "MERN, Node.js, React, TypeScript, GraphQL, REST APIs",
     "Shopify Admin API, Amazon SP-API, microservices, event-driven systems",

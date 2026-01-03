@@ -49,12 +49,12 @@ const About1 = ({ clientHeight }) => {
     <section ref={sectionRef} className="w-full relative select-none">
       <div
         className={`${
-          clientHeight > 650 ? "pt-28 pb-16" : "pt-80 pb-72"
-        } section-container`}
+          clientHeight > 650 ? "pt-16 sm:pt-20 md:pt-28 pb-12 sm:pb-16" : "pt-40 sm:pt-60 md:pt-80 pb-40 sm:pb-60 md:pb-72"
+        } section-container px-4`}
       >
         <h1
           ref={quoteRef}
-          className="font-medium text-[2.70rem] md:text-6xl lg:text-[4rem] text-center"
+          className="font-medium text-xl sm:text-2xl md:text-4xl lg:text-6xl xl:text-[4rem] text-center leading-tight sm:leading-normal"
         >
           <span className="about-1 leading-tight">
             {ABOUT_BIO.paragraph.split(".")[0]}.{" "}

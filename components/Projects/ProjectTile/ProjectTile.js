@@ -36,7 +36,7 @@ const ProjectTile = ({ project, classes, isDesktop }) => {
       }}
     >
       <div
-        className={`h-[28rem] w-[38rem] bg-black ${styles.ProjectTile} rounded-3xl relative p-6 flex flex-col justify-between max-w-full`}
+        className={`h-[22rem] sm:h-[25rem] md:h-[28rem] w-full sm:w-[32rem] md:w-[38rem] bg-black ${styles.ProjectTile} rounded-3xl relative p-4 sm:p-6 flex flex-col justify-between max-w-full`}
         style={{
           background: `linear-gradient(90deg, ${gradient[0]} 0%, ${gradient[1]} 100%)`,
         }}
@@ -73,12 +73,12 @@ const ProjectTile = ({ project, classes, isDesktop }) => {
         <div className="z-10">
           {/* Category */}
           {category && (
-            <p className="text-white/70 text-xs font-mono mb-2 pl-2">
+            <p className="text-white/70 text-xs font-mono mb-1 sm:mb-2 pl-2 text-xs sm:text-xs">
               {category}
             </p>
           )}
           <h1
-            className="font-medium text-2xl sm:text-3xl z-10 pl-2 transform-gpu"
+            className="font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl z-10 pl-2 transform-gpu"
             style={{ transform: "translateZ(3rem)" }}
           >
             {name}
@@ -107,7 +107,7 @@ const ProjectTile = ({ project, classes, isDesktop }) => {
 
         <div className="z-10">
           <h2
-            className="text-base z-10 tracking-wide font-medium text-white transform-gpu mb-3"
+            className="text-sm sm:text-base z-10 tracking-wide font-medium text-white transform-gpu mb-2 sm:mb-3"
             style={{ transform: "translateZ(0.8rem)" }}
           >
             {description}
@@ -115,7 +115,7 @@ const ProjectTile = ({ project, classes, isDesktop }) => {
           
           {/* Tech stack line */}
           {techStack && (
-            <p className="text-white/60 text-xs font-mono">
+            <p className="text-white/60 text-xs font-mono leading-tight">
               {techStack}
             </p>
           )}

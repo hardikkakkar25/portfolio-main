@@ -63,10 +63,10 @@ const Skills = () => {
             <p className="uppercase tracking-widest text-gray-light-1 staggered-reveal">
               SKILLS
             </p>
-            <h1 className="text-6xl mt-2 font-medium text-gradient w-fit staggered-reveal">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl mt-2 font-medium text-gradient w-fit staggered-reveal">
               My Skills
             </h1>
-            <h2 className="text-[1.65rem] font-medium md:max-w-lg w-full mt-2 staggered-reveal">
+            <h2 className="text-base sm:text-lg md:text-[1.65rem] font-medium md:max-w-lg w-full mt-2 staggered-reveal">
               I like to take responsibility to craft aesthetic user experience
               using modern frontend architecture.{" "}
             </h2>

@@ -70,7 +70,7 @@ const Work = ({ isDesktop }) => {
     <section
       ref={sectionRef}
       id={MENULINKS[3].ref}
-      className="w-full relative select-none xs:mt-40 sm:mt-72 mb-96"
+      className="w-full relative select-none mt-16 sm:mt-20 md:mt-24 lg:mt-32 mb-16 sm:mb-24 md:mb-32 lg:mb-48"
     >
       <img
         src="/left-pattern.svg"
@@ -80,22 +80,22 @@ const Work = ({ isDesktop }) => {
         width={320}
         alt=""
       />
-      <div className="section-container py-16 flex flex-col justify-center">
+      <div className="section-container pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 flex flex-col justify-center">
         <div className="flex flex-col work-wrapper">
-          <div className="flex flex-col">
+          <div className="flex flex-col mb-8 sm:mb-12">
             <p className="uppercase tracking-widest text-gray-light-1 staggered-reveal">
               EXPERIENCE
             </p>
-            <h1 className="text-5xl md:text-6xl mt-2 font-medium text-gradient w-fit staggered-reveal">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl mt-2 font-medium text-gradient w-fit staggered-reveal">
               Work History
             </h1>
-            <h2 className="text-xl md:text-[1.65rem] font-medium md:max-w-lg w-full mt-2 staggered-reveal">
+            <h2 className="text-base sm:text-lg md:text-xl lg:text-[1.65rem] font-medium md:max-w-lg w-full mt-2 staggered-reveal">
               2.5+ years building production systems across enterprises and startups.
             </h2>
           </div>
 
           {/* Experience Timeline Cards */}
-          <div className="mt-12 space-y-6 staggered-reveal">
+          <div className="mt-8 sm:mt-10 md:mt-12 space-y-4 sm:space-y-6 staggered-reveal mb-12 sm:mb-16">
             {EXPERIENCE.map((exp, index) => (
               <div
                 key={index}
@@ -104,13 +104,13 @@ const Work = ({ isDesktop }) => {
                 {/* Timeline dot */}
                 <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-indigo-light" />
                 
-                <div className="bg-gradient-to-br from-gray-dark-4/50 to-gray-dark-5/30 border border-gray-dark-3 rounded-xl p-6 hover:border-indigo-light/30 transition-all duration-300">
+                <div className="bg-gradient-to-br from-gray-dark-4/50 to-gray-dark-5/30 border border-gray-dark-3 rounded-xl p-4 sm:p-6 hover:border-indigo-light/30 transition-all duration-300">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
                     <div>
-                      <h3 className="text-xl font-semibold text-white">{exp.role}</h3>
-                      <p className="text-indigo-light font-medium">{exp.company}</p>
+                      <h3 className="text-lg sm:text-xl font-semibold text-white">{exp.role}</h3>
+                      <p className="text-indigo-light font-medium text-sm sm:text-base">{exp.company}</p>
                     </div>
-                    <span className="text-sm text-gray-light-3 font-mono">
+                    <span className="text-xs sm:text-sm text-gray-light-3 font-mono">
                       {exp.period}
                     </span>
                   </div>
@@ -137,8 +137,8 @@ const Work = ({ isDesktop }) => {
           </div>
 
           {/* Interactive Tabs (existing component) */}
-          <div className="mt-16">
-            <h3 className="text-2xl font-semibold text-white mb-6 staggered-reveal">
+          <div className="mt-12 sm:mt-16 md:mt-20 pt-8 sm:pt-12 border-t border-gray-dark-3 mb-[300px] sm:mb-[350px] md:mb-[400px]">
+            <h3 className="text-xl sm:text-2xl font-semibold text-white mb-4 sm:mb-6 staggered-reveal">
               Detailed Journey
             </h3>
             <Tabs tabItems={tabItems} />

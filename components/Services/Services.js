@@ -61,10 +61,10 @@ const Services = () => {
             <p className="uppercase tracking-widest text-gray-light-1 staggered-reveal">
               SERVICES
             </p>
-            <h1 className="text-5xl md:text-6xl mt-2 font-medium text-gradient w-fit staggered-reveal">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-2 font-medium text-gradient w-fit staggered-reveal">
               What I Build
             </h1>
-            <h2 className="text-xl md:text-[1.65rem] font-medium md:max-w-lg w-full mt-2 staggered-reveal">
+            <h2 className="text-base sm:text-lg md:text-xl lg:text-[1.65rem] font-medium md:max-w-lg w-full mt-2 staggered-reveal">
               Specialized services for startups, enterprises, and growing businesses.
             </h2>
           </div>

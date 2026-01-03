@@ -44,23 +44,23 @@ const Testimonials = () => {
   return (
     <section
       ref={sectionRef}
-      className="w-full relative select-none mt-20 md:mt-32"
+      className="w-full relative select-none mt-12 sm:mt-16 md:mt-24 lg:mt-32 mb-16 sm:mb-24 md:mb-32 lg:mb-40"
     >
-      <div className="section-container py-16 flex flex-col justify-center">
+      <div className="section-container py-12 sm:py-16 pb-16 sm:pb-20 md:pb-24 flex flex-col justify-center">
         <div className="flex flex-col testimonials-wrapper">
           <div className="flex flex-col">
             <p className="uppercase tracking-widest text-gray-light-1 staggered-reveal">
               TESTIMONIALS
             </p>
-            <h1 className="text-5xl md:text-6xl mt-2 font-medium text-gradient w-fit staggered-reveal">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-2 font-medium text-gradient w-fit staggered-reveal">
               What Clients Say
             </h1>
-            <h2 className="text-xl md:text-[1.65rem] font-medium md:max-w-lg w-full mt-2 staggered-reveal">
+            <h2 className="text-base sm:text-lg md:text-xl lg:text-[1.65rem] font-medium md:max-w-lg w-full mt-2 staggered-reveal">
               Feedback from founders and teams I&apos;ve worked with.
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12 mb-8 sm:mb-12">
             {TESTIMONIALS.map((testimonial, index) => (
               <div
                 key={index}

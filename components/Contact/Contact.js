@@ -161,17 +161,17 @@ const Contact = () => {
     <section
       ref={sectionRef}
       id={MENULINKS[4].ref}
-      className="w-full relative select-none bg-black text-white py-20 px-4 sm:px-10"
+      className="w-full relative select-none bg-black text-white pt-12 sm:pt-16 md:pt-20 pb-20 px-4 sm:px-10"
     >
       <div className="section-container max-w-6xl mx-auto flex flex-col justify-center">
         <div className="flex flex-col contact-wrapper items-start">
           <p className="uppercase tracking-widest text-gray-400 staggered-reveal">
             CONTACT
           </p>
-          <h1 className="text-5xl font-bold text-gradient staggered-reveal">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gradient staggered-reveal">
             Start a Project
           </h1>
-          <h2 className="text-xl md:text-2xl font-light mt-2 staggered-reveal max-w-2xl">
+          <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-light mt-2 staggered-reveal max-w-2xl">
             Looking to build a dashboard, internal tool, e-commerce system, or SaaS MVP? Share a few details and get a response within 24 hours.
           </h2>
         </div>
